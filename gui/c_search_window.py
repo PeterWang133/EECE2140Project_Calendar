@@ -104,8 +104,9 @@ class Search(tk.Frame):
         alpha_val = tk.StringVar(value=self.alpha_lst)
         self.alpha_lstbox = tk.Listbox(master=self.search_frame,width=10, height=2, listvariable=alpha_val)
         self.alpha_lstbox.pack()
+        self.alpha_lstbox.bind('<<ListboxSelect>>', self.alphabet_on_off)
 
-    def alphabet_on_off(self.event):
+    def alphabet_on_off(self,event):
         index = self.alpha_lstbox.curselection()[0]
         selected_choice = self.alpha_lstbox.get(index)
         if selected_choice == 'Yes':

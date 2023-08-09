@@ -21,7 +21,6 @@ d_task_2=CalendarTask(d_4,'Take kids back home', False)
 d_task = CalendarTask(d_3,'Buy grocery', False)
 d_meeting = CalenderMeeting(d_4,'Meeting with Kyle', False,'www.Apple.com')
 
-
 events.add_event(d_task.date_time,d_task)
 events.add_event(d,d_arrangement)
 events.add_event(d_deadline.date_time, d_deadline)
