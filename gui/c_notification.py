@@ -15,7 +15,7 @@ class Notification(tk.Frame):
     
     def noti_field(self):
         response = messagebox.askquestion('Upcoming Event', 'You have an upcoming event')
-    
+ 
     def reminder_lst(self):
         reminder_lst = []
         for d_t in self.object.event_dict:
