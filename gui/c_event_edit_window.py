@@ -164,8 +164,6 @@ class EditWindow():
                 self.link = ''.join(self.link.split())
                 self.event.link = self.link
         
-            print(self.event)
-
             self.parent.destroy()
 
     def cancel_edit(self):

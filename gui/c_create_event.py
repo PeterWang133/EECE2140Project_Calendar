@@ -90,7 +90,6 @@ class CreateEvent():
     def arrangement_recur(self,event):
         index = self.recurring_lstbox.curselection()[0]
         self.recurring_selection = self.recurring_lstbox.get(index)
-        print(self.recurring_selection)
 
     def meeting_frame(self):
         self.link_label = tk.Label(master=self.event_frame,text='Link')
@@ -184,7 +183,6 @@ class CreateEvent():
         else:
             e=self.event_obj(self.date_time,self.event_details,self.reminder)
             self.object.add_event(e.date_time,e)
-        print(e)
         self.parent.destroy()
     def cancel_create(self):
         self.parent.destroy()

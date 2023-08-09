@@ -112,7 +112,6 @@ class Search(tk.Frame):
             self.key_word = ' '.join(self.key_word)
         self.search_result = c_calendar.search_and_sort(self.object,self.date_lst,self.event_type_selection,self.key_word,False)
         self.search_result_obj = c_calendar.search_and_sort_obj(self.object,self.date_lst,self.event_type_selection,self.key_word)
-        print(self.search_result_obj)
         self.result_text.pack()
         self.result_field()
 
