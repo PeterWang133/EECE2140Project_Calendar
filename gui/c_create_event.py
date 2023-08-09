@@ -137,8 +137,7 @@ class CreateEvent():
     def reminder_setup(self):
         if self.remind_selected_type == 'on':
             value=self.set_reminder_text.get('1.0',tk.END)
-            value=value.split()
-            value = ''.join(value)
+            value=value.rstrip()
             value = int(value)
             if self.reminder_box_option == 'minutes':
                 self.reminder = datetime.timedelta(minutes=value)
@@ -160,11 +159,9 @@ class CreateEvent():
         self.date = self.date_box.get('1.0', tk.END)
         self.time = self.time_box.get('1.0', tk.END)
 
-        self.date = self.date.split()
-        self.date = '-'.join(self.date)
+        self.date = self.date.rstrip()
 
-        self.time = self.time.split()
-        self.time = ':'.join(self.time)
+        self.time = self.time.rstrip()
 
         self.string_dt = self.date+' '+self.time+':00'
         self.date_time = datetime.datetime.strptime(self.string_dt, "%m-%d-%Y %H:%M:%S")

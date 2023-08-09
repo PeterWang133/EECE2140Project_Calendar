@@ -37,6 +37,10 @@ class Search(tk.Frame):
         self.key_label.pack()
         self.key_word_field()
 
+        self.alpha_label = tk.Label(master=self.search_frame, text='Sort by Alphabets')
+        self.alpha_label.pack()
+        self.alphabet_field()
+
         self.date_type_box.bind('<<ListboxSelect>>', self.date_box_select)
         self.event_type_box.bind('<<ListboxSelect>>', self.event_type_field)
         self.search_button = tk.Button(master=self.search_frame, text='Search', command=self.search_command)
@@ -94,6 +98,20 @@ class Search(tk.Frame):
     def key_word_field(self):
         self.key_word_text = tk.Text(master=self.search_frame, width=20, height=2)
         self.key_word_text.pack()
+
+    def alphabet_field(self):
+        self.alpha_lst = ['Yes','No']
+        alpha_val = tk.StringVar(value=self.alpha_lst)
+        self.alpha_lstbox = tk.Listbox(master=self.search_frame,width=10, height=2, listvariable=alpha_val)
+        self.alpha_lstbox.pack()
+
+    def alphabet_on_off(self.event):
+        index = self.alpha_lstbox.curselection()[0]
+        selected_choice = self.alpha_lstbox.get(index)
+        if selected_choice == 'Yes':
+            self.alphabet = True
+        else:
+            self.alphabet = False
     
     def search_command(self):
         if self.date_type_selection=='Date':
@@ -110,8 +128,7 @@ class Search(tk.Frame):
             self.key_word=''
         else:
             self.key_word = ' '.join(self.key_word)
-        self.search_result = c_calendar.search_and_sort(self.object,self.date_lst,self.event_type_selection,self.key_word,False)
-        self.search_result_obj = c_calendar.search_and_sort_obj(self.object,self.date_lst,self.event_type_selection,self.key_word)
+        self.search_result = c_calendar.search_and_sort(self.object,self.date_lst,self.event_type_selection,self.key_word,self.alphabet)
         self.result_text.pack()
         self.result_field()
 
