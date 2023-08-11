@@ -14,7 +14,6 @@ import winsound
 # Update for notification and deadline counttown
 
 Events = EventLibrary()
-Events.sort_by_date()
 
 
 def search_by_date(obj,date):
@@ -83,6 +82,7 @@ def search_and_sort(obj:EventLibrary,date_range, type, key_word, alphabet):
         search_obj.event_dict=search_by_type(search_obj, type)
     if key_word!='':
         search_obj.event_dict=search_by_keyword(search_obj, key_word)
+    search_obj.event_dict = search_obj.sort_by_date()
     if alphabet==True:
         lst = search_obj.sort_by_alphabet()
         for i in range (len(lst)):

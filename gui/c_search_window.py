@@ -51,12 +51,14 @@ class Search(tk.Frame):
         self.result_text = tk.Text(master=self.result_frame)
 
     def date_box_select(self,event):
-        selected_index = self.date_type_box.curselection()[0]
-        self.date_type_selection = self.date_type_box.get(selected_index)
-        if self.date_type_selection == 'Date':
-            self.search_single_date()
-        elif self.date_type_selection == 'Date Range':
-            self.search_date_range()
+        selected_index = self.date_type_box.curselection()
+        if selected_index:
+            selected_index=selected_index[0]
+            self.date_type_selection = self.date_type_box.get(selected_index)
+            if self.date_type_selection == 'Date':
+                self.search_single_date()
+            elif self.date_type_selection == 'Date Range':
+                self.search_date_range()
     
     def search_date_field(self):
         self.date_frame = tk.Frame(master=self.parent,relief='groove', borderwidth=5)
@@ -92,8 +94,10 @@ class Search(tk.Frame):
     
 
     def event_type_field(self,event):
-        selected_event = self.event_type_box.curselection()[0]
-        self.event_type_selection = self.event_obj_lst[selected_event]
+        selected_event = self.event_type_box.curselection()
+        if selected_event:
+            selected_event=selected_event[0]
+            self.event_type_selection = self.event_obj_lst[selected_event]
     
     def key_word_field(self):
         self.key_word_text = tk.Text(master=self.search_frame, width=20, height=2)
@@ -107,12 +111,14 @@ class Search(tk.Frame):
         self.alpha_lstbox.bind('<<ListboxSelect>>', self.alphabet_on_off)
 
     def alphabet_on_off(self,event):
-        index = self.alpha_lstbox.curselection()[0]
-        selected_choice = self.alpha_lstbox.get(index)
-        if selected_choice == 'Yes':
-            self.alphabet = True
-        else:
-            self.alphabet = False
+        index = self.alpha_lstbox.curselection()
+        if index:
+            index=index[0]
+            selected_choice = self.alpha_lstbox.get(index)
+            if selected_choice == 'Yes':
+                self.alphabet = True
+            else:
+                self.alphabet = False
     
     def search_command(self):
         if self.date_type_selection=='Date':

@@ -1,6 +1,9 @@
 import datetime
 from object.c_event import CalendarEvent
 from object.c_arrange import CalendarArrangement
+from object.c_meeting import CalenderMeeting
+from object.c_task import CalendarTask
+from object.c_deadline import CalendarDeadline
 
 class EventLibrary:
     def __init__(self) -> None:
@@ -119,8 +122,71 @@ class EventLibrary:
         return s
     
     def save_file(self):
-        pass
+        with open('Calendar_events.txt', mode='w', encoding='utf8') as f:
+            for d_t in self.event_dict:
+                for e in self.event_dict[d_t]:
+                    print(e.write_to_file(), file=f)
+    
 
     def read_file(self):
-        pass
+        #Read the file
+        with open('Calendar_events.txt', mode='r', encoding='utf8') as f:
+            s = f.readlines()
+        s = [i.split() for i in s]
+
+        def write_meeting(lst):
+                date_time = lst[1]+' '+lst[2]
+                date_time = datetime.datetime.strptime(date_time,"%Y-%m-%d %H:%M:%S")
+                event_details = lst[3:-2]
+                event_details = ' '.join(event_details)
+                reminder = False
+                if lst[-2] != 'False':
+                    reminder = lst[-2]
+                    reminder = datetime.datetime.strptime(reminder,"%m-%d-%Y,%H:%M:%S")
+                    reminder = date_time-reminder
+                link = lst[-1]
+                if link == 'empty':
+                    link=''
+                return CalenderMeeting(date_time,event_details,reminder,link)
+        
+        def write_arrangement(lst):
+                date_time = lst[1]+' '+lst[2]
+                date_time = datetime.datetime.strptime(date_time,"%Y-%m-%d %H:%M:%S")
+                event_details = lst[3:-2]
+                event_details = ' '.join(event_details)
+                reminder = False
+                if lst[-2] != 'False':
+                    reminder = lst[-2]
+                    reminder = datetime.datetime.strptime(reminder,"%m-%d-%Y,%H:%M:%S")
+                    reminder = date_time-reminder
+                recurring = lst[-1]
+                return CalendarArrangement(date_time,event_details,reminder,recurring)
+        
+        def write_task_or_deadline(lst):
+                date_time = lst[1]+' '+lst[2]
+                date_time = datetime.datetime.strptime(date_time,"%Y-%m-%d %H:%M:%S")
+                event_details = lst[3:-1]
+                event_details = ' '.join(event_details)
+                reminder = False
+                if lst[-1] != 'False':
+                    reminder = lst[-1]
+                    reminder = datetime.datetime.strptime(reminder,"%m-%d-%Y,%H:%M:%S")
+                    reminder = date_time-reminder
+                if lst[0] == 'Task':
+                    return CalendarTask(date_time,event_details,reminder)
+                elif lst[0] == 'Deadline':
+                    return CalendarDeadline(date_time,event_details,reminder)
+        if s!=[]:
+            for event in s:
+                obj = ''
+                if event[0] == 'Arrangement':
+                    obj = write_arrangement(event)
+                elif event[0] == 'Meeting':
+                    obj=write_meeting(event)
+                else:
+                    obj=write_task_or_deadline(event)
+                self.add_event(obj.date_time,obj)
+
+        
+
     

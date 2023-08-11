@@ -1,19 +1,43 @@
-import datetime
+import tkinter as tk
 
-time_delay = datetime.timedelta(days=5)
-d = datetime.datetime.today()
-d_later = d+datetime.timedelta(days=5)
-read_delay = ''
 
-with open(file='Testing.txt', mode='w', encoding='utf8') as f:
-    s = d_later.strftime('%m-%d-%Y %H:%M:%S')
-    print(s, file=f)
+def on_configure(event):
+    # update scrollregion after starting 'mainloop'
+    # when all widgets are in canvas
+    canvas.configure(scrollregion=canvas.bbox('all'))
 
-with open(file='Testing.txt', mode='r', encoding='utf8') as f:
-    s=f.readline()
-    s=s.rstrip()
-    print(s)
-    read_delay = datetime.datetime.strptime(s,"%m-%d-%Y %H:%M:%S")
 
-#delta = datetime.timedelta(hours=read_delay.hour, minutes=read_delay.minute, seconds=read_delay.second)
-#print(delta)
+root = tk.Tk()
+
+# --- create canvas with scrollbar ---
+
+canvas = tk.Canvas(root)
+canvas.pack(side=tk.LEFT)
+
+scrollbar = tk.Scrollbar(root, command=canvas.yview)
+scrollbar.pack(side=tk.LEFT, fill='y')
+
+canvas.configure(yscrollcommand = scrollbar.set)
+
+# update scrollregion after starting 'mainloop'
+# when all widgets are in canvas
+canvas.bind('<Configure>', on_configure)
+
+# --- put frame in canvas ---
+
+frame = tk.Frame(canvas)
+
+# --- add widgets in frame ---
+
+l = tk.Button(frame, text="Hello", font="-size 50")
+l.pack()
+
+l = tk.Button(frame, text="World", font="-size 50")
+l.pack()
+
+l = tk.Button(frame, text="Test text 1\nTest text 2\nTest text 3\nTest text 4\nTest text 5\nTest text 6\nTest text 7\nTest text 8\nTest text 9", font="-size 20")
+l.pack()
+
+# --- start program ---
+canvas.create_window((0,0), window=frame, anchor='nw')
+root.mainloop()

@@ -53,30 +53,32 @@ class CreateEvent():
         self.reminder_type_lstbox.bind('<<ListboxSelect>>', self.reminder_option)
     
     def create_event(self,event):
-        selected_index = self.type_lstbox.curselection()[0]
-        self.event_obj = self.type_obj_lst[selected_index]
-        selected_type = self.type_lstbox.get(selected_index)
-        self.d_t_label.pack()
-        self.date_box.pack()
-        self.d_t_label_2.pack()
-        self.time_box.pack()
-        self.e_d_label.pack()
-        self.detail_text.pack()
-        self.r_label.pack()
-        self.reminder_type_lstbox.pack()
+        selected_index = self.type_lstbox.curselection()
+        if selected_index:
+            selected_index=selected_index[0]
+            self.event_obj = self.type_obj_lst[selected_index]
+            selected_type = self.type_lstbox.get(selected_index)
+            self.d_t_label.pack()
+            self.date_box.pack()
+            self.d_t_label_2.pack()
+            self.time_box.pack()
+            self.e_d_label.pack()
+            self.detail_text.pack()
+            self.r_label.pack()
+            self.reminder_type_lstbox.pack()
 
-        self.event_frame.pack_forget()
-        self.event_frame = tk.Frame(master=self.parent)
-        self.event_frame.pack(side=tk.RIGHT)
+            self.event_frame.pack_forget()
+            self.event_frame = tk.Frame(master=self.parent)
+            self.event_frame.pack(side=tk.RIGHT)
 
-        if selected_type == 'Task':
-            pass
-        elif selected_type == 'Arrangement':
-            self.arrangement_frame()
-        elif selected_type == 'Meeting':
-            self.meeting_frame()
-        elif selected_type == 'Deadline':
-            pass
+            if selected_type == 'Task':
+                pass
+            elif selected_type == 'Arrangement':
+                self.arrangement_frame()
+            elif selected_type == 'Meeting':
+                self.meeting_frame()
+            elif selected_type == 'Deadline':
+                pass
     
     def arrangement_frame(self):
         self.recurring_label = tk.Label(master=self.event_frame,text='Recurring Type')
@@ -88,8 +90,10 @@ class CreateEvent():
         self.recurring_lstbox.bind('<<ListboxSelect>>', self.arrangement_recur)
     
     def arrangement_recur(self,event):
-        index = self.recurring_lstbox.curselection()[0]
-        self.recurring_selection = self.recurring_lstbox.get(index)
+        index = self.recurring_lstbox.curselection()
+        if index:
+            index=index[0]
+            self.recurring_selection = self.recurring_lstbox.get(index)
 
     def meeting_frame(self):
         self.link_label = tk.Label(master=self.event_frame,text='Link')
@@ -98,14 +102,16 @@ class CreateEvent():
         self.link_text.pack()
  
     def reminder_option(self,event):
-        selected_index = self.reminder_type_lstbox.curselection()[0]
-        self.remind_selected_type = self.reminder_type_lstbox.get(selected_index)
-        if self.remind_selected_type == 'off':
-            self.reminder_frame_off()
-        elif self.remind_selected_type == 'on':
-            self.reminder_frame_off()
-            self.set_reminder_frame.pack_forget()
-            self.reminder_frame_on()
+        selected_index = self.reminder_type_lstbox.curselection()
+        if selected_index:
+            selected_index=selected_index[0]
+            self.remind_selected_type = self.reminder_type_lstbox.get(selected_index)
+            if self.remind_selected_type == 'off':
+                self.reminder_frame_off()
+            elif self.remind_selected_type == 'on':
+                self.reminder_frame_off()
+                self.set_reminder_frame.pack_forget()
+                self.reminder_frame_on()
 
     def reminder_frame_off(self):
         self.reminder_type_frame.pack_forget()
@@ -129,12 +135,15 @@ class CreateEvent():
         self.reminder_box.bind('<<ListboxSelect>>', self.set_reminder)
 
     def set_reminder(self,event):
-        reminder_box_value = self.reminder_box.curselection()[0]
-        self.reminder_box_option = self.reminder_box.get(reminder_box_value)
-        self.set_reminder_label.pack()
-        self.set_reminder_text.pack()
+        reminder_box_value = self.reminder_box.curselection()
+        if reminder_box_value:
+            reminder_box_value=reminder_box_value[0]
+            self.reminder_box_option = self.reminder_box.get(reminder_box_value)
+            self.set_reminder_label.pack()
+            self.set_reminder_text.pack()
     
     def reminder_setup(self):
+        self.reminder = False
         if self.remind_selected_type == 'on':
             value=self.set_reminder_text.get('1.0',tk.END)
             value=value.rstrip()
@@ -167,6 +176,7 @@ class CreateEvent():
         self.date_time = datetime.datetime.strptime(self.string_dt, "%m-%d-%Y %H:%M:%S")
 
         self.event_details = self.detail_text.get('1.0', tk.END)
+        self.event_details = self.event_details.rstrip()
         self.reminder_setup()
         e=''
         if self.event_obj == CalendarArrangement:
@@ -180,6 +190,7 @@ class CreateEvent():
         else:
             e=self.event_obj(self.date_time,self.event_details,self.reminder)
             self.object.add_event(e.date_time,e)
+        self.object.save_file()
         self.parent.destroy()
     def cancel_create(self):
         self.parent.destroy()

@@ -14,6 +14,7 @@ class HomeScreen(tk.Frame):
         super().__init__(parent)
         self.parent = parent
         self.object = obj
+        obj.read_file()
         self.home_field()
     
     def home_field(self):
@@ -37,6 +38,8 @@ class HomeScreen(tk.Frame):
     
     def edit_event(self):
         new_window = tk.Toplevel()
+        new_window.geometry('690x450')
+        new_window.resizable(True,True)
         e = EventEditor(new_window,self.object)
     
     def search_event(self):

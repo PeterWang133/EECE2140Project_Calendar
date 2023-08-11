@@ -8,3 +8,15 @@ class CalendarTask(CalendarEvent):
 
     def __str__(self) -> str:
         return f'Task\n{super().__str__()}\n'
+    
+    def write_to_file(self):
+        r = self.reminder
+        if self.reminder != False:
+            r = self.date_time-self.reminder
+            r = datetime.datetime.strftime(r,'%m-%d-%Y,%H:%M:%S')
+        return 'Task '+f'{self.date_time} '+f'{self.event_details} '+f'{r}'
+    
+            
+
+
+        

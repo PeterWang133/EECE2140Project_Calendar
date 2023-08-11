@@ -42,12 +42,12 @@ class Greeting(tk.Frame):
 
     def upcoming_event(self,today:datetime):
         today = today.date().strftime("%m-%d-%Y")
-        s = c_calendar.search_and_sort(self.obj, [today, today], CalenderMeeting,'', False)
-        s += c_calendar.search_and_sort(self.obj, [today, today], CalendarTask,'', False)
-        s += c_calendar.search_and_sort(self.obj, [today, today], CalendarArrangement,'', False)
+        s = c_calendar.search_and_sort(self.obj, [today, today], '','', False)
+        d = c_calendar.search_and_sort(self.obj, [today, today], CalendarDeadline,'', False)
+        s=s.replace(d,'')
         if s=='':
             return 'No event today.\n'
-        return s
+        return 'Event today\n'+s
 
     def update_time(self):
         now = datetime.datetime.today()

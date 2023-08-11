@@ -81,3 +81,11 @@ class CalendarArrangement(CalendarEvent):
         else:
             recur = 'Does not recur.'
         return 'Arrangement\n'+super().__str__()+f'\n{recur}'+'\n'
+    
+    def write_to_file(self):
+        r = self.reminder
+        if self.reminder != False:
+            r = self.date_time-self.reminder
+            r = datetime.datetime.strftime(r,'%m-%d-%Y,%H:%M:%S')
+        return 'Arrangement '+f'{self.date_time} '+f'{self.event_details} '+f'{r} '+f'{self.recurring} '
+    

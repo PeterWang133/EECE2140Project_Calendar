@@ -163,7 +163,7 @@ class EditWindow():
                 self.link = self.link_text.get('1.0', tk.END)
                 self.link = ''.join(self.link.split())
                 self.event.link = self.link
-        
+            self.object.save_file()
             self.parent.destroy()
 
     def cancel_edit(self):
@@ -175,4 +175,5 @@ class EditWindow():
         response = messagebox.askquestion('Delete', 'Are you sure to delete the event?')
         if response == 'yes':
             self.object.del_event(self.event.date_time,self.event)
+            self.object.save_file()
             self.parent.destroy()

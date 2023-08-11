@@ -17,3 +17,13 @@ class CalenderMeeting(CalendarEvent):
         if self.link!='':
             s='\nLink: '+self.link
         return 'Meeting\n'+super().__str__()+f'{s}\n'
+    
+    def write_to_file(self):
+        r = self.reminder
+        if self.reminder != False:
+            r = self.date_time-self.reminder
+            r = datetime.datetime.strftime(r,'%m-%d-%Y,%H:%M:%S')
+        l = 'empty'
+        if self.link!='':
+            l = self.link
+        return 'Meeting '+f'{self.date_time} '+f'{self.event_details} '+f'{r} '+f'{l}'

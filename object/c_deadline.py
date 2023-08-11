@@ -20,7 +20,9 @@ class CalendarDeadline(CalendarEvent):
             return 'Deadline\n'+super().__str__()+'\n'+f'{-1*self.count_down(current_dt)} day(s) left.\n'
         
     def write_to_file(self):
-        delta = self.date_time-self.reminder
-        delta = delta.strftime('%m-%d-%Y %H:%M:%S')
-        s='Deadline\n'+f'{self.date_time}\n'+f'{self.event_details}\n'+f'{delta}\n'
+        r = self.reminder
+        if self.reminder != False:
+            r = self.date_time-self.reminder
+            r = datetime.datetime.strftime(r,'%m-%d-%Y,%H:%M:%S')
+        s='Deadline '+f'{self.date_time} '+f'{self.event_details} '+f'{r}'
         return s
