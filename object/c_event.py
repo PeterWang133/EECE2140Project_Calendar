@@ -15,8 +15,11 @@ class CalendarEvent(CalendarTIme):
         self.delay_time = self.date_time-self.reminder+delay_time
 
     def notification(self, current_time:datetime):
-        return self.reminder and current_time.date() == self.date_time.date() and current_time.hour == self.date_time.hour and current_time.minute == (self.date_time-self.reminder).minute
+        if self.reminder!=False:
+            t = self.date_time-self.reminder
+            return self.reminder and current_time.date() == t.date() and current_time.strftime("%H:%M") == t.strftime("%H:%M")
             #winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
+        return False
     
     def delay_noti(self, current_time:datetime):
         if self.reminder and current_time.date() == self.delay_time.date() and current_time.hour == self.delay_time.hour and current_time.minute == self.delay_time.minute:

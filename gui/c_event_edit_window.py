@@ -42,7 +42,7 @@ class EditWindow():
 
         self.e_d_label = tk.Label(master=self.parent,text='Event Details')
         self.e_d_label.pack()
-        self.e_d_text = tk.Text(master=self.parent, width=20,height=3)
+        self.e_d_text = tk.Text(master=self.parent, width=20,height=6)
         self.e_d_text.pack()
         self.e_d_text.insert(tk.END,self.event_details)
 
@@ -53,7 +53,6 @@ class EditWindow():
         self.reminder_val = ['none','minutes', 'hours', 'days']  
         remind_value = tk.StringVar(value=self.reminder_val)
         self.reminder_box = tk.Listbox(master=self.reminder_type_frame,listvariable=remind_value, width=20, height=5)
-        self.reminder_box.select_set(0)
         self.reminder_type_frame.pack(side=tk.TOP)
         self.reminder_label.pack()
         self.reminder_box.pack()
@@ -80,15 +79,16 @@ class EditWindow():
             self.meeting_display()
 
     def reminder_select(self,event):
-        index = self.reminder_box.curselection()[0]
-        self.reminder_type = self.reminder_box.get(index)
-        self.set_reminder_frame.pack_forget()
-        if self.reminder_type == 'none':
-            self.reminder = False
-        else:
-            self.set_reminder_frame = tk.Frame(master=self.parent,height=2) 
-            self.set_reminder_frame.pack(side=tk.TOP) 
-            self.set_reminder()
+        index = self.reminder_box.curselection()
+        if index:
+            self.reminder_type = self.reminder_box.get(index[0])
+            self.set_reminder_frame.pack_forget()
+            if self.reminder_type == 'none':
+                self.reminder = False
+            else:
+                self.set_reminder_frame = tk.Frame(master=self.parent,height=2) 
+                self.set_reminder_frame.pack(side=tk.TOP) 
+                self.set_reminder()
     
     def set_reminder(self):
         self.set_reminder_label = tk.Label(master=self.set_reminder_frame, text='Set Reminder')
@@ -118,13 +118,14 @@ class EditWindow():
         self.recurring_label.pack(side=tk.TOP)
         self.recurring_lstbox.pack(side=tk.BOTTOM)
         self.recurring_frame.pack(side=tk.BOTTOM)
-
+        self.recurring = self.event.recurring
         self.recurring_lstbox.bind('<<ListboxSelect>>', self.recurring_selection)
 
     def recurring_selection(self, event):
-        index = self.recurring_lstbox.curselection()[0]
-        self.recurring = self.recurring_lstbox.get(index)
-        self.recurring = ''.join(self.recurring.split())
+        index = self.recurring_lstbox.curselection()
+        if index:
+            self.recurring = self.recurring_lstbox.get(index[0])
+            self.recurring = ''.join(self.recurring.split())
 
     def meeting_display(self):
         self.link_frame = tk.Frame(master=self.parent)

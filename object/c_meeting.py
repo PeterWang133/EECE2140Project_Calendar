@@ -8,9 +8,12 @@ class CalenderMeeting(CalendarEvent):
         self.reminder = reminder
         self.link = link
 
-    def open_link (self, current_time:datetime):
-        if self.link!='' and self.date_time-self.reminder == current_time:
+    def open_link (self):
             webbrowser.open(self.link)
+    
+    def reminder_for_meeting(self,current_time:datetime):
+        reserve_time = self.date_time-datetime.timedelta(minutes=5)
+        return self.reminder!=False and self.link!='' and current_time.strftime("%m-%d-%Y %H:%M") == reserve_time.strftime("%m-%d-%Y %H:%M")
     
     def __str__(self) -> str:
         s=''
