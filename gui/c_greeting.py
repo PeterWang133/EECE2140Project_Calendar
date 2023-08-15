@@ -21,7 +21,7 @@ class Greeting(tk.Frame):
         self.greeting_label.pack()
         self.event_label.pack()
         self.greeting_label.after(1000,self.update_time)
-        self.event_label.after(30000, self.update_event)
+        self.event_label.after(10000, self.update_event)
     
     def greeting_message(self, now):
         s = f'Today is {now.date().strftime("%m-%d-%Y")}. It is now {now.time().strftime("%H:%M:%S")}.\n'
@@ -66,7 +66,7 @@ class Greeting(tk.Frame):
         if s_old != s:
             self.event_label.replace('1.0',tk.END,s)
         self.event_label.configure(state='disabled')
-        self.greeting_label.after(30000,self.update_event)
+        self.greeting_label.after(10000,self.update_event)
 
 
 

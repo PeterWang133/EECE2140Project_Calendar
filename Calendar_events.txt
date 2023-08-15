@@ -8,4 +8,7 @@ Task 2023-08-14 08:30:00 Take pill 08-14-2023,08:20:00
 Task 2023-08-14 14:00:00 Take nap 08-14-2023,13:50:00
 Arrangement 2023-08-14 11:30:00 Nothing False Weekly 
 Task 2023-08-14 05:05:00 ... 08-14-2023,05:04:00
-Meeting 2023-08-14 05:12:00 Meeting 08-14-2023,05:08:00 https://www.apple.com/
+Meeting 2023-08-15 07:35:00 Meeting 08-15-2023,07:31:00 https://www.apple.com/
+Task 2023-08-14 19:50:00 Go to Math class 08-14-2023,19:45:00
+Task 2023-08-15 06:55:00 Wake up 08-15-2023,06:54:00
+Task 2023-08-15 07:25:00 Take shower 08-15-2023,07:24:00

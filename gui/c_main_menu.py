@@ -13,6 +13,7 @@ class HomeScreen(tk.Frame):
     def __init__(self, parent, obj:EventLibrary) -> None:
         super().__init__(parent)
         self.parent = parent
+        self.parent.title('Main Menu')
         self.object = obj
         obj.read_file()
         self.home_field()
@@ -34,21 +35,23 @@ class HomeScreen(tk.Frame):
 
     def create_event(self):
         new_window = tk.Toplevel()
+        new_window.title('Create Event')
         c = CreateEvent(new_window,self.object)
     
     def edit_event(self):
         new_window = tk.Toplevel()
+        new_window.title('Event Editor')
         new_window.geometry('690x450')
         new_window.resizable(True,True)
         e = EventEditor(new_window,self.object)
     
     def search_event(self):
         new_window = tk.Toplevel()
+        new_window.title('Search Event')
         s = Search(new_window,self.object)
     
     def call_calendar(self):
-        new_window = tk.Toplevel
-        c = TkinterCalendar(new_window,self.object)
+        c = TkinterCalendar(self.object)
     
     def noti_field(self):
         n = Notification(self.object)

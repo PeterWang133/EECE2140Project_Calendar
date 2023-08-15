@@ -8,15 +8,13 @@ from object.c_arrange import CalendarArrangement
 from object.c_meeting import CalenderMeeting
 from gui.c_main_menu import HomeScreen
 from gui.c_notification import Notification
+from object.c_event import CalendarEvent
 
 import webbrowser
 
 events = EventLibrary()
 
-
 root = tk.Tk()
 h = HomeScreen(root,events)
 
-#n = Notification(root,events)
-#messagebox.showinfo('Upcoming event', 'You have an upcoming event')
 root.mainloop()

@@ -7,9 +7,10 @@ import functools
 
 class TkinterCalendar(calendar.Calendar):
 
-    def __init__(self, parent, obj:EventLibrary, firstweekday: int = 0) -> None:
+    def __init__(self, obj:EventLibrary, firstweekday: int = 0) -> None:
         super().__init__(firstweekday)
         new_window = tk.Toplevel()
+        new_window.title('Calendar View')
         self.current_time = datetime.datetime.today()
         self.year = self.current_time.year
         self.month = self.current_time.month
@@ -17,9 +18,6 @@ class TkinterCalendar(calendar.Calendar):
         self.obj = obj
         self.frame = tk.Frame(master=new_window)
         self.event_text=tk.Text(master=new_window)
-        self.scroll_bar = tk.Scrollbar()
-        self.scroll_bar.pack( side = tk.RIGHT,fill = tk.Y )
-        self.event_text.configure(yscrollcommand=self.scroll_bar.set)
         self.calendar_frame(new_window,self.year,self.month)
         self.button_frame = tk.Frame(master=new_window,relief='groove', borderwidth=5)
         self.previous_button = tk.Button(master=self.button_frame,text="Previous", command=self.previous_month)

@@ -152,6 +152,7 @@ class EventEditor():
     
     def edit_field(self,event):
         new_window = tk.Toplevel()
+        new_window.title('Event editor window')
         edit_window = EditWindow(new_window,event, self.object)
         
 
