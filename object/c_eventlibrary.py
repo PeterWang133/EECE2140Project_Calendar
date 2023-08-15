@@ -46,13 +46,6 @@ class EventLibrary:
         alp_lst = sorted(alp_lst, key = lambda x:x[1].event_details)
         return alp_lst
     
-    def get_event(self, event:CalendarEvent):
-        for date_time in self.event_dict:
-            for e in self.event_dict[date_time]:
-                if e.date_time == event.date_time and e.event_details == event.event_details:
-                    return e
-        return 'Cannot find the event.'
-    
     def get_event_by_keyword(self, keyword):
         keyword_dict={}
         for date_time in self.event_dict:
@@ -128,7 +121,6 @@ class EventLibrary:
             for d_t in self.event_dict:
                 for e in self.event_dict[d_t]:
                     print(e.write_to_file(), file=f)
-    
 
     def read_file(self):
         #Read the file

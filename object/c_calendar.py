@@ -65,12 +65,6 @@ def edit_event_details(Event:CalendarEvent, details):
 def edit_event_date(Event:CalendarEvent, date_time):
     Event.modify_datetime(date_time)
 
-def change_notification(Event:CalendarEvent):
-    Event.on_or_off()
-
-def arrangement_recurring(Arrangement:CalendarArrangement,recurring_type):
-    Arrangement.recurring = recurring_type
-
 def search_and_sort(obj:EventLibrary,date_range, type, key_word, alphabet):
     search_obj = EventLibrary()
     search_obj.event_dict = obj.sort_by_date()
@@ -103,11 +97,3 @@ def search_and_sort_obj(obj:EventLibrary,date_range, type, key_word):
     if key_word!='':
         search_obj.event_dict=search_by_keyword(search_obj, key_word)
     return search_obj.event_dict
-
-
-def play_sound(event:CalendarEvent, current_time):
-    if event.notification(current_time) or event.delay_noti(event.delay_time, current_time):
-        winsound.PlaySound('sound.wav', winsound.SND_FILENAME)
-
-
-events = EventLibrary() 
