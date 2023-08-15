@@ -18,6 +18,7 @@ class Greeting(tk.Frame):
         self.greeting_label ['text'] = self.greeting_message(self.now)
         self.event_label = tk.Text()
         self.event_label.insert(tk.END, self.event_message(self.now))
+        self.event_label.configure(state='disabled')
         self.greeting_label.pack()
         self.event_label.pack()
         self.greeting_label.after(1000,self.update_time)
@@ -44,7 +45,7 @@ class Greeting(tk.Frame):
         today = today.date().strftime("%m-%d-%Y")
         s = c_calendar.search_and_sort(self.obj, [today, today], CalendarTask,'', False)
         s += c_calendar.search_and_sort(self.obj, [today, today], CalendarArrangement,'', False)
-        s +=c_calendar.search_and_sort(self.obj, [today, today], CalenderMeeting,'', False)
+        s += c_calendar.search_and_sort(self.obj, [today, today], CalenderMeeting,'', False)
         if s=='':
             return 'No event today.\n'
         return 'Event today\n'+s

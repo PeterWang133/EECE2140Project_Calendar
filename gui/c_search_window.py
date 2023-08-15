@@ -92,7 +92,6 @@ class Search(tk.Frame):
         self.end_date_search.pack()
         self.date_frame.pack(side=tk.LEFT)
     
-
     def event_type_field(self,event):
         selected_event = self.event_type_box.curselection()
         if selected_event:
