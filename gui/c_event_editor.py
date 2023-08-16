@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from object.c_task import CalendarTask
 from object.c_arrange import CalendarArrangement
 from object.c_meeting import CalenderMeeting
@@ -42,6 +43,7 @@ class EventEditor():
         self.result_frame = tk.Frame(master=self.result_canvas)
         self.scroll_bar = tk.Scrollbar(master=self.parent,orient='vertical')
         self.result_canvas.create_window((0,0),anchor='nw',window=self.result_frame)
+
 
         self.date_type_box.bind('<<ListboxSelect>>', self.date_box_select)
         self.event_type_box.bind('<<ListboxSelect>>', self.event_type_field)
@@ -111,6 +113,14 @@ class EventEditor():
     # update scrollregion after starting 'mainloop'
     # when all widgets are in canvas
             self.result_canvas.configure(scrollregion=self.result_canvas.bbox('all'))
+        
+        def on_mousewheel(event):
+            if self.scroll_bar.get() != (0.0, 1.0):
+                self.result_canvas.yview_scroll(-1 * int(event.delta / 120), "units")
+        
+        self.result_frame.bind_all("<MouseWheel>", on_mousewheel)
+        self.result_frame.bind_all('<Shift-Button-4>', lambda *args: self.result_canvas.yview(tk.SCROLL, -1, tk.UNITS))
+        self.result_frame.bind_all('<Shift-Button-5>', lambda *args: self.result_canvas.yview(tk.SCROLL, 1, tk.UNITS))
 
         if self.date_type_selection=='Date':
             self.date_s = self.date_search.get('1.0', tk.END)

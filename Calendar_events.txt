@@ -1,4 +1,4 @@
-Task 2023-08-15 08:00:00 Check E-mail False
+Task 2023-08-15 08:05:00 Check E-mail False
 Arrangement 2023-08-10 15:30:00 Take pill 08-10-2023,15:25:00 Daily 
 Deadline 2023-08-14 15:20:00 Computing Fundamentals Final !!! False
 Deadline 2023-08-21 09:30:00 Math Final! False
@@ -7,11 +7,22 @@ Meeting 2023-08-17 19:00:00 Interview for Co-op 08-16-2023,19:00:00 https://zoom
 Arrangement 2023-01-01 10:00:00 Church duty 12-31-2022,10:00:00 Weekly 
 Task 2023-08-16 17:45:00 Wash dishes False
 Task 2023-08-16 10:00:00 Organize learning material 08-16-2023,09:55:00
+Meeting 2023-08-16 10:00:00 Team Building Workshop 08-16-2023,09:30:00 empty
 Arrangement 2023-08-09 07:30:00 Matt's Birthday False Yearly 
-Meeting 2023-08-16 13:30:00 Meeting with Luke 08-16-2023,13:10:00 empty
+Meeting 2023-08-16 15:20:00 Meeting with Luke False empty
 Deadline 2023-08-19 23:59:00 DMV Exam due date 08-17-2023,23:59:00
 Task 2023-08-17 10:45:00 Grocery Shopping 08-17-2023,09:45:00
 Arrangement 2023-08-19 14:20:00 Replace the carpet False Monthly 
-Deadline 2023-8-31 21:00:00 Pay Tuition 8-31-2023,19:00:00
-Deadline 2023-8-21 23:59:00 EECE 2140 Project Report due! False 
-Deadline 2023-9-5 16:00:00 Submit "I Am Here" form and Health Report 09-04-2023,16:00:00
+Deadline 2023-08-31 21:00:00 Pay Tuition 08-31-2023,19:00:00
+Deadline 2023-08-21 23:59:00 EECE 2140 Project Report due! False
+Deadline 2023-09-05 16:00:00 Submit "I Am Here" form and Health Report 09-04-2023,16:00:00
+Meeting 2023-08-15 13:35:00 Meeting with Luke 08-15-2023,13:35:00 https://zoom.us/
+Arrangement 2023-04-06 14:50:00 Yoga class 04-06-2023,13:00:00 Weekly 
+Meeting 2023-09-02 13:20:00 Online Gaming Tournament 09-02-2023,13:10:00 https://www.xbox.com/en-US/
+Arrangement 2023-08-17 14:30:00 Dentist Appointment 08-17-2023,14:00:00 None 
+Deadline 2023-08-20 09:00:00 Project Deadline - Phase 1 08-20-2023,08:00:00
+Arrangement 2023-08-22 13:00:00 Movie Night with Friends 08-22-2023,12:30:00 None 
+Task 2023-08-17 06:00:00 Wake Up and Stretch 08-17-2023,05:30:00
+Task 2023-08-17 06:30:00 Morning Jog 08-17-2023,06:00:00
+Task 2023-08-16 07:00:00 Breakfast and Coffee 08-17-2023,06:30:00
+Task 2023-08-16 04:30:00 Exercise and Stretch Break 08-17-2023,04:00:00

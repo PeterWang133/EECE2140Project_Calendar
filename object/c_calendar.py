@@ -11,12 +11,16 @@ import winsound
 # Search by keyword (Done)
 # Date Countdown (Done)
 # Edit an existing event (for reminder type, recurring type, event details, and datetime)
-# Update for notification and deadline counttown
+# Update for notification
 
 Events = EventLibrary()
 
 
 def search_by_date(obj,date):
+    """Search the events by date
+    : param obj: an EventLibrary object, date: a String
+    : return: an event dictionary with the event of the searched date
+    """
     d_t = date.split('-')
     d_t.extend([0,0,0])
     da_ti=''
@@ -25,6 +29,10 @@ def search_by_date(obj,date):
     return date_dict
 
 def search_by_daterange(obj,date_start, date_end):
+    """Search the events by date range
+    : param obj: an EventLibrary object, date_start: a String, date_end: a String
+    : return: an event dictionary with the event of the searched date range
+    """
     d_t_st = date_start.split('-')
     d_t_st.extend([0,0,0])
     d_t_ed = date_end.split('-')
@@ -36,6 +44,11 @@ def search_by_daterange(obj,date_start, date_end):
     return date_dict
 
 def search_by_daterange_obj(obj:EventLibrary,date_start, date_end):
+    """Search the events by date range
+        Does not create copies of CalendarArrangement object
+    : param obj: an EventLibrary object, date_start: a String, date_end: a String 
+    : return: an event dictionary with the event of the searched date range
+    """
     d_t_st = date_start.split('-')
     d_t_st.extend([0,0,0])
     d_t_ed = date_end.split('-')
@@ -47,25 +60,27 @@ def search_by_daterange_obj(obj:EventLibrary,date_start, date_end):
     return date_dict
 
 def search_by_type(obj:EventLibrary,type):
+    """Search the events by object type
+    : param obj: an EventLibrary object, type: an object
+    : return: an event dictionary with the matching object
+    """
     type_dict = {}
     type_dict = obj.get_event_by_type(type)
     return type_dict
 
 def search_by_keyword(obj, key_word):
+    """Search the events with event details that match the keyword 
+    : param obj: an EventLibrary object, key_word: a String
+    : return: an event dictionary with the events that have event details match the keyword
+    """
     key_dict = obj.get_event_by_keyword(key_word)
     return key_dict
 
-def date_count_down(Event:CalendarEvent, date_time):
-    day = Event.date_time-date_time
-    return day.days
-
-def edit_event_details(Event:CalendarEvent, details):
-    Event.modify_event_details(details)
-
-def edit_event_date(Event:CalendarEvent, date_time):
-    Event.modify_datetime(date_time)
-
 def search_and_sort(obj:EventLibrary,date_range, type, key_word, alphabet):
+    """Search the events that match the criteria given by the parameter
+    : param obj: an EventLibrary object, date_range: a List, type: an object, key_word: a String, alphabet: a Boolean
+    : return: a String
+    """
     search_obj = EventLibrary()
     search_obj.event_dict = obj.sort_by_date()
     s=''
@@ -87,6 +102,10 @@ def search_and_sort(obj:EventLibrary,date_range, type, key_word, alphabet):
     return s
 
 def search_and_sort_obj(obj:EventLibrary,date_range, type, key_word):
+    """Search the events that match the criteria given by the parameter
+    : param obj: an EventLibrary object, date_range: a List, type: an object, key_word: a String, alphabet: a Boolean
+    : return: a dictionary that contains all matching event objects
+    """
     search_obj = EventLibrary()
     search_obj.event_dict = obj.sort_by_date()
     if len(date_range) == 1:

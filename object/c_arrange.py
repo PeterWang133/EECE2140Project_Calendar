@@ -4,30 +4,57 @@ from object.c_time import CalendarTIme
 
 
 class CalendarArrangement(CalendarEvent):
+    """A CalendarArrangement class that calls for all arrangement type event which is a subclass of CalendarTask"""
     def __init__(self, date_time: CalendarTIme, event_details: str,reminder, recurring: str) -> None:
+        """Initializes a CalendarArrangement object"""
         super().__init__(date_time, event_details, reminder)
         self.date_time = date_time
         self.reminder = reminder
         self.recurring = recurring
     
     def remind_hourly(self, date_time):
+        """Checks with the current date and time for an arrangement that recurs hourly
+        : param self: a CalendarArrangement Object, date_time: a datetime object
+        return: a Boolean
+        """
         return self.date_time.minute == date_time.minute
     
     def remind_daily(self, date_time):
+        """Checks with the current date and time for an arrangement that recurs daily
+        : param self: a CalendarArrangement Object, date_time: a datetime object
+        return: a Boolean
+        """
         return self.date_time.hour == date_time.hour
     
     def remind_weekly(self,date_time:CalendarTIme):
+        """Checks with the current date and time for an arrangement that recurs weekly
+        : param self: a CalendarArrangement Object, date_time: a datetime object
+        return: a Boolean
+        """
         d_1 = CalendarTIme(self.date_time)
         d_2 = CalendarTIme(date_time)
         return d_1.weekday_lst() == d_2.weekday_lst()
     
     def remind_monthly(self, date_time):
+        """Checks with the current date and time for an arrangement that recurs monthly
+        : param self: a CalendarArrangement Object, date_time: a datetime object
+        return: a Boolean
+        """
         return self.date_time.day == date_time.day
     
     def remind_yearly(self, date_time):
+        """Checks with the current date and time for an arrangement that recurs yearly
+        : param self: a CalendarArrangement Object, date_time: a datetime object
+        return: a Boolean
+        """
         return self.date_time.day == date_time.day and self.date_time.month == date_time.month
         
     def remind_event(self, date_time):
+        """Checks the recurring type of the CalendarArrangement and determines which method should be used
+        for checking time
+        : param self: a CalendarArrangement Object, date_time: a datetime object
+        return: a Boolean, True if the object recurs and False if the recurring type is 'None'
+        """
         arrange = ''
         if self.recurring == 'Yearly':
             arrange=self.remind_yearly(date_time)
@@ -44,6 +71,10 @@ class CalendarArrangement(CalendarEvent):
         return arrange
     
     def change_time(self, current_time):
+        """Computes the next date and time which the object would appear
+        : param self: a CalendarArrangement Object, current_time: a datetime object
+        : return: a datetime object
+        """
         new_time=0
         if self.recurring == 'Yearly':
             new_time = datetime.datetime(year=current_time.year+1, month=self.date_time.month, day=self.date_time.day, minute=self.date_time.minute, second=self.date_time.second)
@@ -58,6 +89,10 @@ class CalendarArrangement(CalendarEvent):
         return new_time
     
     def check_recur(self,start,end):
+        """Checks if an object should appear in a time range
+        : param self: a CalendarArrangement, start: a datetime object, end: a datetime object
+        : return: True if the object does recur within the time range
+        """
         timestamp = self.date_time
         while timestamp<=end:
             if timestamp>=start and timestamp<=end:
@@ -66,6 +101,10 @@ class CalendarArrangement(CalendarEvent):
         False
     
     def __str__(self) -> str:
+        """Prints out the CalendarArrangement object
+        : param self: a CalendarArrangement object
+        : return: a String
+        """
         recur = ''
         date_time = CalendarTIme(self.date_time)
         if self.recurring == 'Yearly':
@@ -83,6 +122,10 @@ class CalendarArrangement(CalendarEvent):
         return 'Arrangement\n'+super().__str__()+f'\n{recur}'+'\n'
     
     def write_to_file(self):
+        """Writes the CalendarArrangement into a text file in String format
+        : param self: a CalendarArrangement object
+        : return: a String
+        """
         r = self.reminder
         if self.reminder != False:
             r = self.date_time-self.reminder
