@@ -13,7 +13,7 @@ class CalendarDeadline(CalendarEvent):
         : param self: a CalendarDeadline object, date_time: a datetime object
         : return: an Integer that indicates the number of days left or passed
         """
-        day = date_time-self.date_time
+        day = date_time.date()-self.date_time.date()
         return int(day.days)
     
     def __str__(self) -> str:
