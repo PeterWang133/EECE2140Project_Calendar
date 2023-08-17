@@ -66,7 +66,7 @@ class EventLibrary:
         for d_t in self.event_dict:
             for e in self.event_dict[d_t]:
                 alp_lst.append([d_t,e])
-        alp_lst = sorted(alp_lst, key = lambda x:x[1].event_details)
+        alp_lst = sorted(alp_lst, key = lambda x:x[1].event_details,reverse=reverse)
         return alp_lst
     
     def get_event_by_keyword(self, keyword):

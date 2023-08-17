@@ -2,7 +2,7 @@ import datetime
 from object.c_time import CalendarTIme
 from abc import abstractclassmethod
 
-import winsound
+#import winsound
 
 class CalendarEvent(CalendarTIme):
     """A CalendarEvent class that calls for all types of events which is a subclass of CalendarTIme"""

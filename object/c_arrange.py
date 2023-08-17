@@ -53,7 +53,8 @@ class CalendarArrangement(CalendarEvent):
         """Checks the recurring type of the CalendarArrangement and determines which method should be used
         for checking time
         : param self: a CalendarArrangement Object, date_time: a datetime object
-        return: a Boolean, True if the object recurs and False if the recurring type is 'None'
+        return: a Boolean, True if the object recurs and the current datetime matches the recurring datetime
+                False if the recurring type is 'None'
         """
         arrange = ''
         if self.recurring == 'Yearly':
