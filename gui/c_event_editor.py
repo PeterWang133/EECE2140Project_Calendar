@@ -11,7 +11,12 @@ from gui.c_event_edit_window import EditWindow
 import functools
  
 class EventEditor():
+    '''Class for managing the event editing interface.'''
     def __init__(self, parent, object:EventLibrary) -> None:
+        '''Initialize the EventEditor class.
+        Args:
+            parent (tk.Tk): The parent Tkinter window.
+            obj (EventLibrary): The EventLibrary object to manage events.'''
         self.parent = parent
         self.object = object
         self.search_field()
@@ -54,6 +59,7 @@ class EventEditor():
         self.result_canvas.configure(yscrollcommand=self.scroll_bar.set)
 
     def date_box_select(self,event):
+        '''Handle the selection of date search type.'''
         selected_index = self.date_type_box.curselection()
         if selected_index:
             selected_index = selected_index[0]
@@ -64,10 +70,12 @@ class EventEditor():
                 self.search_date_range()
     
     def search_date_field(self):
+        '''Display the date search fields.'''
         self.date_frame = tk.Frame(master=self.parent,relief='groove', borderwidth=5)
         self.date_frame.pack(side=tk.LEFT)
 
     def search_single_date(self):
+        '''Display the search fields for a single date.'''
         self.date_frame.pack_forget()
         self.date_frame = tk.Frame(master=self.parent,relief='groove', borderwidth=5)
         self.date_label = tk.Label(master=self.date_frame)
@@ -78,6 +86,7 @@ class EventEditor():
         self.date_frame.pack(side=tk.LEFT)
 
     def search_date_range(self):
+        '''Display the search fields for a date range.'''
         self.date_frame.pack_forget()
 
         self.date_frame = tk.Frame(master=self.parent,relief='groove', borderwidth=5)
@@ -97,16 +106,19 @@ class EventEditor():
     
 
     def event_type_field(self,event):
+        '''Handle the selection of event type.'''
         selected_event = self.event_type_box.curselection()
         if len(selected_event) != 0:
             selected_event = selected_event[0]
             self.event_type_selection = self.event_obj_lst[selected_event]
     
     def key_word_field(self):
+        '''Display the keyword search field.'''
         self.key_word_text = tk.Text(master=self.search_frame, width=20, height=2)
         self.key_word_text.pack()
     
     def search_command(self):
+        '''Execute the search command.'''
         self.result_frame.destroy()
 
         def on_configure(event):
@@ -149,6 +161,7 @@ class EventEditor():
 
 
     def result_frame_obj(self,parent):
+        '''Create the result frame object.'''
         i=0
         frame = tk.Frame(parent)
         for d_t in self.search_result_obj:
@@ -161,6 +174,7 @@ class EventEditor():
 
     
     def edit_field(self,event):
+        '''Open the event editing window.'''
         new_window = tk.Toplevel()
         new_window.title('Event editor window')
         edit_window = EditWindow(new_window,event, self.object)

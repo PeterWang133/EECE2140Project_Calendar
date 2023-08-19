@@ -11,7 +11,13 @@ from object.c_time import CalendarTIme
 import object.c_calendar as c_calendar
 
 class EditWindow():
+    '''Class for editing event details through a GUI window.'''
     def __init__ (self,parent,e:CalendarEvent,obj:EventLibrary):
+        '''Initialize EditWindow class
+        Args: parent (tk.Tk): The parent Tkinter window
+            e (CalendarEvent): The event to be edited
+            obj (EventLibrary): The EventLibrary object managing events
+        '''
         self.parent = parent
         self.event = e
         self.object = obj
@@ -29,6 +35,7 @@ class EditWindow():
         self.event_display()
     
     def event_display(self):
+        '''Display the event details and options for editing.'''
         self.date_time = self.event.date_time
         self.event_details = self.event.event_details
         self.reminder = self.event.reminder
@@ -79,6 +86,7 @@ class EditWindow():
             self.meeting_display()
 
     def reminder_select(self,event):
+        '''Select the reminder type and display reminder setting options.'''
         index = self.reminder_box.curselection()
         if index:
             self.reminder_type = self.reminder_box.get(index[0])
@@ -91,12 +99,14 @@ class EditWindow():
                 self.set_reminder()
     
     def set_reminder(self):
+        '''Display the reminder setup options.'''
         self.set_reminder_label = tk.Label(master=self.set_reminder_frame, text='Set Reminder')
         self.set_reminder_text = tk.Text(master=self.set_reminder_frame, width=10, height=1)
         self.set_reminder_label.pack(side=tk.TOP)
         self.set_reminder_text.pack(side=tk.BOTTOM)
 
     def reminder_setup(self):
+        '''Configure the reminder setup based on user input.'''
         if self.reminder_type!='none':
             value=self.set_reminder_text.get('1.0',tk.END)
             value=value.split()
@@ -110,6 +120,7 @@ class EditWindow():
                 self.reminder = datetime.timedelta(days=value)
 
     def arrangement_display(self):
+        '''Display arrangement-related options for editing.'''
         self.recurring_frame = tk.Frame(master=self.parent)
         self.recurring_label = tk.Label(master=self.recurring_frame,text='Recurring Type')
         self.recurring_lst = ['None', 'Hourly', 'Daily', 'Weekly', 'Monthly', 'Yearly']
@@ -122,12 +133,14 @@ class EditWindow():
         self.recurring_lstbox.bind('<<ListboxSelect>>', self.recurring_selection)
 
     def recurring_selection(self, event):
+        '''Select the recurring type for an arrangement.'''
         index = self.recurring_lstbox.curselection()
         if index:
             self.recurring = self.recurring_lstbox.get(index[0])
             self.recurring = ''.join(self.recurring.split())
 
     def meeting_display(self):
+        '''Display meeting-related options for editing.'''
         self.link_frame = tk.Frame(master=self.parent)
         self.link_label = tk.Label(master=self.link_frame,text='Link')
         self.link_text = tk.Text(master=self.link_frame,width=30,height=1)
@@ -141,6 +154,7 @@ class EditWindow():
 
 
     def save_edit(self):
+        '''Save the edited event details and options.'''
         response = messagebox.askquestion('Save', 'Save changes?')
         if response == 'yes':
             self.date_time = self.d_t_text.get('1.0', tk.END)
@@ -168,11 +182,13 @@ class EditWindow():
             self.parent.destroy()
 
     def cancel_edit(self):
+        '''Cancel the edit process and close the window.'''
         response = messagebox.askquestion('Cancel Edit', 'Are you sure you want to cancel edit?')
         if response=='yes':
             self.parent.destroy()
 
     def delete_event(self):
+        '''Delete the event and close the window.'''
         response = messagebox.askquestion('Delete', 'Are you sure to delete the event?')
         if response == 'yes':
             self.object.del_event(self.event.date_time,self.event)

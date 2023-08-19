@@ -7,12 +7,24 @@ from object.c_deadline import CalendarDeadline
 from object.c_eventlibrary import EventLibrary
 
 class CreateEvent():
+    '''CreateEvent class for creating events through a GUI'''
     def __init__(self,parent,obj:EventLibrary):
+        '''Initialize the CreateEvent class
+        params:
+            self (CreateEvent): The CreateEvent object
+            parent (tk.Tk): The parent Tkinter window
+            obj (EventLibrary): The EventLibrary object to manage events
+        Returns:
+            None'''
         self.parent = parent
         self.object = obj
         self.create_event_window()
 
     def create_event_window(self):
+        '''Initialize CreateEvent class
+        params:
+            parent (tk.Tk): The parent Tkinter window
+            obj (EventLibrary): The EventLibrary object'''
         self.win_frame = tk.Frame(master=self.parent)
         self.type_label = tk.Label(master=self.win_frame, text='Select a Type')
         self.type_label.pack()
@@ -52,7 +64,10 @@ class CreateEvent():
         self.type_lstbox.bind('<<ListboxSelect>>', self.create_event)
         self.reminder_type_lstbox.bind('<<ListboxSelect>>', self.reminder_option)
     
-    def create_event(self,event):
+    def create_event(self):
+        '''Create the window for editing events through the GUI.
+        params: self- CreateEvent obj
+        returns: None'''
         selected_index = self.type_lstbox.curselection()
         if selected_index:
             selected_index=selected_index[0]
@@ -81,6 +96,9 @@ class CreateEvent():
                 pass
     
     def arrangement_frame(self):
+        ''' shows the options to the user after selecting create arrangment from GUI
+        params: self- CreateEvent obj
+        returns: None'''
         self.recurring_label = tk.Label(master=self.event_frame,text='Recurring Type')
         self.recurring_lst = ['None', 'Hourly', 'Daily', 'Weekly', 'Monthly', 'Yearly']
         self.recurring_val = tk.StringVar(value=self.recurring_lst)
@@ -90,18 +108,27 @@ class CreateEvent():
         self.recurring_lstbox.bind('<<ListboxSelect>>', self.arrangement_recur)
     
     def arrangement_recur(self,event):
+        ''' function to track if created arrangment is meant to be recurring
+        params: self- CreateEvent obj
+        returns: None'''
         index = self.recurring_lstbox.curselection()
         if index:
             index=index[0]
             self.recurring_selection = self.recurring_lstbox.get(index)
 
     def meeting_frame(self):
+        ''' displays a field to enter a meeting link for a meeting in GUI
+        params: self- CreateEvent obj
+        returns: None'''
         self.link_label = tk.Label(master=self.event_frame,text='Link')
         self.link_text = tk.Text(master=self.event_frame,width=30,height=1)
         self.link_label.pack()
         self.link_text.pack()
  
-    def reminder_option(self,event):
+    def reminder_option(self):
+        ''' displays the option to turn reminder on of off from GUI
+        params: self- CreateEvent obj
+        returns: None'''
         selected_index = self.reminder_type_lstbox.curselection()
         if selected_index:
             selected_index=selected_index[0]
@@ -114,11 +141,17 @@ class CreateEvent():
                 self.reminder_frame_on()
 
     def reminder_frame_off(self):
+        ''' Shows nothing when reminder is turned off 
+        params: self- CreateEvent obj
+        returns: None'''
         self.reminder_type_frame.pack_forget()
         self.set_reminder_frame.pack_forget()
         self.reminder = ''
 
     def reminder_frame_on(self):
+        ''' shows the field for entering the desired reminder when reminder is turned on in GUI
+         params: self- CreateEvent obj
+        returns: None '''
         self.reminder_type_frame = tk.Frame(master=self.parent)
         self.reminder_label = tk.Label(master=self.reminder_type_frame,text='Select the reminder time')
         self.reminder_val = ['minutes', 'hours', 'days']  
@@ -135,6 +168,7 @@ class CreateEvent():
         self.reminder_box.bind('<<ListboxSelect>>', self.set_reminder)
 
     def set_reminder(self,event):
+        '''Set the reminder time when the reminder type is selected.'''
         reminder_box_value = self.reminder_box.curselection()
         if reminder_box_value:
             reminder_box_value=reminder_box_value[0]
@@ -143,6 +177,7 @@ class CreateEvent():
             self.set_reminder_text.pack()
     
     def reminder_setup(self):
+        '''Configure the reminder setup based on user input.'''
         self.reminder = False
         if self.remind_selected_type == 'on':
             value=self.set_reminder_text.get('1.0',tk.END)
@@ -156,6 +191,7 @@ class CreateEvent():
                 self.reminder = datetime.timedelta(days=value)
 
     def function_area(self):
+        '''Create the functional area for create and cancel buttons.'''
         self.function_frame = tk.Frame(master=self.parent)
         self.create_button = tk.Button(master=self.function_frame,text='Create', command=self.create_object)
         self.cancel_button = tk.Button(master=self.function_frame,text='Cancel',command=self.cancel_create)
@@ -165,6 +201,7 @@ class CreateEvent():
     
     # Create Object
     def create_object(self):
+        '''Create and add the event object to the EventLibrary.'''
         self.date = self.date_box.get('1.0', tk.END)
         self.time = self.time_box.get('1.0', tk.END)
 
@@ -193,5 +230,6 @@ class CreateEvent():
         self.object.save_file()
         self.parent.destroy()
     def cancel_create(self):
+        '''Cancel event creation and close the window.'''
         self.parent.destroy()
 
