@@ -7,7 +7,7 @@ from object.c_eventlibrary import EventLibrary
 import object.c_calendar as c_calendar
 
 class Search(tk.Frame):
-    ''' class for displaying the search field in the GUI'''
+    '''Class for displaying the search field in the GUI'''
     def __init__(self, parent, object:EventLibrary) -> None:
         '''Initializes the Search class.
         Args:

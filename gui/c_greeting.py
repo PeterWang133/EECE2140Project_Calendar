@@ -26,25 +26,25 @@ class Greeting(tk.Frame):
         """A Greeting class that controlls the GUI for the greeting message"""
     
     def greeting_message(self, now):
-        """ a function to display a string with the date and time 
+        '''A function to display a string with the date and time 
         Args: 
             self-greeting object and now-datetime object
-        returns: string"""
+        Returns: string'''
         s = f'Today is {now.date().strftime("%m-%d-%Y")}. It is now {now.time().strftime("%H:%M:%S")}.\n'
         return s
 
     def event_message(self, now):
-        ''' a function to display upcomming events and deadlines
-        args: now datetime object
-        returns: string '''
+        ''' A function to display upcomming events and deadlines
+        Args: now datetime object
+        Returns: string '''
         s = self.upcoming_deadline(now)+self.upcoming_event(now)
         return s
     
 
     def upcoming_deadline(self,now:datetime):
-        """ a function to get either no upcoming deadlines or soon approaching deadlines
-        args: now- datimetime object
-        returns: string """
+        """ A function to get either no upcoming deadlines or soon approaching deadlines
+        Args: now- datimetime object
+        Returns: string """
         today = now.date().strftime("%m-%d-%Y")
         future_time = (now+datetime.timedelta(days=10))
         future_time = future_time.date().strftime("%m-%d-%Y")
@@ -54,9 +54,9 @@ class Greeting(tk.Frame):
         return 'Important Notice\n'+s
 
     def upcoming_event(self,today:datetime):
-        ''' function to get up coming events
-        args: today- dateime object
-        returns: string'''
+        ''' Function to get up coming events
+        Args: today- dateime object
+        Returns: string'''
         today = today.date().strftime("%m-%d-%Y")
         s = c_calendar.search_and_sort(self.obj, [today, today], CalendarTask,'', False)
         s += c_calendar.search_and_sort(self.obj, [today, today], CalendarArrangement,'', False)
@@ -66,9 +66,7 @@ class Greeting(tk.Frame):
         return 'Event today\n'+s
 
     def update_time(self):
-        ''' function to update the time on the greeting message to the current time
-        args: self- Greeting object
-        return: None'''
+        '''Function to update the time on the greeting message to the current time'''
         now = datetime.datetime.today()
         self.greeting_label.configure(text=self.greeting_message(now))
         self.greeting_label.after(1000,self.update_time)
@@ -77,9 +75,7 @@ class Greeting(tk.Frame):
         now = datetime.datetime.today()
 
     def update_event(self):
-        ''' a function to get new event details after editing an event 
-        args: self- Greeting
-        returns: None'''
+        ''' a function to get new event details after editing an event'''
         self.event_label.configure(state='normal')
         now = datetime.datetime.today()
         s=self.event_message(now)

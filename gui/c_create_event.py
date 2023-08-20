@@ -10,7 +10,7 @@ class CreateEvent():
     '''CreateEvent class for creating events through a GUI'''
     def __init__(self,parent,obj:EventLibrary):
         '''Initialize the CreateEvent class
-        params:
+        Args:
             self (CreateEvent): The CreateEvent object
             parent (tk.Tk): The parent Tkinter window
             obj (EventLibrary): The EventLibrary object to manage events
@@ -22,7 +22,7 @@ class CreateEvent():
 
     def create_event_window(self):
         '''Initialize CreateEvent class
-        params:
+        Args:
             parent (tk.Tk): The parent Tkinter window
             obj (EventLibrary): The EventLibrary object'''
         self.win_frame = tk.Frame(master=self.parent)
@@ -65,9 +65,7 @@ class CreateEvent():
         self.reminder_type_lstbox.bind('<<ListboxSelect>>', self.reminder_option)
     
     def create_event(self):
-        '''Create the window for editing events through the GUI.
-        params: self- CreateEvent obj
-        returns: None'''
+        '''Create the window for editing events through the GUI.'''
         selected_index = self.type_lstbox.curselection()
         if selected_index:
             selected_index=selected_index[0]
@@ -96,9 +94,7 @@ class CreateEvent():
                 pass
     
     def arrangement_frame(self):
-        ''' shows the options to the user after selecting create arrangment from GUI
-        params: self- CreateEvent obj
-        returns: None'''
+        ''' Shows the options to the user after selecting create arrangment from GUI'''
         self.recurring_label = tk.Label(master=self.event_frame,text='Recurring Type')
         self.recurring_lst = ['None', 'Hourly', 'Daily', 'Weekly', 'Monthly', 'Yearly']
         self.recurring_val = tk.StringVar(value=self.recurring_lst)
@@ -108,27 +104,21 @@ class CreateEvent():
         self.recurring_lstbox.bind('<<ListboxSelect>>', self.arrangement_recur)
     
     def arrangement_recur(self,event):
-        ''' function to track if created arrangment is meant to be recurring
-        params: self- CreateEvent obj
-        returns: None'''
+        ''' Function to track if created arrangment is meant to be recurring'''
         index = self.recurring_lstbox.curselection()
         if index:
             index=index[0]
             self.recurring_selection = self.recurring_lstbox.get(index)
 
     def meeting_frame(self):
-        ''' displays a field to enter a meeting link for a meeting in GUI
-        params: self- CreateEvent obj
-        returns: None'''
+        '''Displays a field to enter a meeting link for a meeting in GUI'''
         self.link_label = tk.Label(master=self.event_frame,text='Link')
         self.link_text = tk.Text(master=self.event_frame,width=30,height=1)
         self.link_label.pack()
         self.link_text.pack()
  
     def reminder_option(self):
-        ''' displays the option to turn reminder on of off from GUI
-        params: self- CreateEvent obj
-        returns: None'''
+        '''Displays the option to turn reminder on of off from GUI'''
         selected_index = self.reminder_type_lstbox.curselection()
         if selected_index:
             selected_index=selected_index[0]
@@ -141,17 +131,13 @@ class CreateEvent():
                 self.reminder_frame_on()
 
     def reminder_frame_off(self):
-        ''' Shows nothing when reminder is turned off 
-        params: self- CreateEvent obj
-        returns: None'''
+        ''' Shows nothing when reminder is turned off'''
         self.reminder_type_frame.pack_forget()
         self.set_reminder_frame.pack_forget()
         self.reminder = ''
 
     def reminder_frame_on(self):
-        ''' shows the field for entering the desired reminder when reminder is turned on in GUI
-         params: self- CreateEvent obj
-        returns: None '''
+        ''' shows the field for entering the desired reminder when reminder is turned on in GUI'''
         self.reminder_type_frame = tk.Frame(master=self.parent)
         self.reminder_label = tk.Label(master=self.reminder_type_frame,text='Select the reminder time')
         self.reminder_val = ['minutes', 'hours', 'days']  
