@@ -5,8 +5,8 @@ import object.c_calendar as c_calendar
 import calendar
 import functools
 
-class TkinterCalendar(calendar.Calendar):
-    ''' TkinterCalendar class which is a subclass of Calendar'''
+class ClaendarView(calendar.Calendar):
+    ''' ClaendarView class which is a subclass of Calendar'''
 
     def __init__(self, obj:EventLibrary, firstweekday: int = 0) -> None:
         '''Create the calendar display frame within the GUI.
