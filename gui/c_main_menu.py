@@ -67,7 +67,7 @@ class HomeScreen(tk.Frame):
     
     def call_calendar(self):
         '''Open the calendar GUI.'''
-        c = TkinterCalendar(self.object)
+        c = ClanedarView(self.object)
     
     def noti_field(self):
         """Display the notificaiton field"""
